@@ -2,7 +2,7 @@
 
 This is a signal decoder. Plan is that it'll be runnable as an executable, will monitor the port that you specify, and will decode incoming signals that *follow a certain bit-packed format*.
 
-This project is a smaller part of a larger [Logic Analyzer][01] project that our ECE692 group is doing. We haven't yet decided upon a format, will update this readme when we do.
+This project is a smaller part of a larger [Logic Analyzer][01] project that our ECE692 (Embedded Systems @ NJIT) group is doing. We haven't yet decided upon a format, will update this readme when we do.
 
 ## Plan
 
@@ -35,7 +35,9 @@ logic-analyzer-go/
 ├── internal/
 │   ├── serial/         # Handles bugst/go-serial and packet framing
 │   ├── decoder/        # RLE expansion and protocol decoding (UART/SPI) 
-│   └── transport/      # Socket server to talk to Python
+│   ├── transport/      # Socket server to talk to Python
+│   ├── config/         # Holds configuration struct for the entire runtime of the program 
+│   └── logging/        # Small logging package, to easily color text either red or green.
 ├── go.mod
 └── go.sum
 ``` 
