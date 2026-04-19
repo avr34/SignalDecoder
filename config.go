@@ -66,7 +66,7 @@ func getConfig() (*config, error) {
 		return nil, errors.New(errLog(preamble) + "No serial port found")
 	} else {
 		if exists := slices.Contains(ports, *port); !exists {
-			return nil, fmt.Errorf(preamble+"Port %s not found\n", *port)
+			return nil, fmt.Errorf(errLog(preamble) + "Port %s not found\n", *port)
 		}
 	}
 

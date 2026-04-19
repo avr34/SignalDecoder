@@ -10,8 +10,8 @@ import (
 // For the constants, mapping protocol to a uint8.
 type ProtocolType uint8
 
-// Each pair of three bits maps to a channel, from LSB to MSB.
-// There are 4 groups of 3 bits, which corresponds
+// Each pair of four bits maps to a channel, from LSB to MSB.
+// There are 4 groups of 4 bits, which corresponds
 // to the pins of that protocol. For each protocol:
 //   - UART: tx=1,   rx=2
 //   - SPI:  miso=1, mosi=2, clk=3, cs=4
