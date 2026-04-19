@@ -4,6 +4,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"log"
 	"slices"
 	"strings"
 
@@ -36,6 +37,8 @@ func getConfig() (*config, error) {
 
 	flag.Parse()
 
+	log.Print(statLog(preamble) + "Parsed arguments")
+
 	// Handle invalid inputs.
 	if *port == "" {
 		return nil, errors.New(errLog(preamble) + "Must specify a port.")
@@ -66,7 +69,7 @@ func getConfig() (*config, error) {
 		return nil, errors.New(errLog(preamble) + "No serial port found")
 	} else {
 		if exists := slices.Contains(ports, *port); !exists {
-			return nil, fmt.Errorf(errLog(preamble) + "Port %s not found\n", *port)
+			return nil, fmt.Errorf(errLog(preamble)+"Port %s not found\n", *port)
 		}
 	}
 
@@ -90,6 +93,8 @@ func getConfig() (*config, error) {
 		return nil, err
 	}
 
+	log.Print(statLog(preamble) + "CLI argument error checking complete.")
+
 	return &ret, nil
 }
 
@@ -97,6 +102,7 @@ func getConfig() (*config, error) {
 func parsePins(p ProtocolType, pins string) (ProtocolPins, error) {
 	preamble := "[parsePins]: "
 
+	log.Print(statLog(preamble) + "Parsing pins argument")
 	switch p {
 	case UART:
 		ret, err := parseUART(pins)
@@ -127,10 +133,13 @@ func parsePins(p ProtocolType, pins string) (ProtocolPins, error) {
 			return ret, nil
 		}
 	case NONE:
+		log.Print(statLog(preamble) + "No pin configuration provided. Proceeding.")
 		return 0, nil
 	default:
-		return 0, errors.New(errLog(preamble) + "No pin parsing function found.")
+		return 0, errors.New(errLog(preamble) + "Unknown protocol referenced.")
 	}
+
+	log.Print(statLog(preamble) + "Pin parsing complete.")
 
 	return 0, nil
 }

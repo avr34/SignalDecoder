@@ -34,6 +34,7 @@ type ProtocolType uint8
 // It is used internally only. Not exported to python script.
 type ProtocolPins uint16
 
+// functions to change colors of text.
 var (
 	errLog  = color.New(color.FgRed).SprintFunc()
 	statLog = color.New(color.FgGreen).SprintFunc()
@@ -72,8 +73,8 @@ func (a *config) print() {
 	preamble := "[print] "
 
 	log.Printf(statLog(preamble) + "Current configuration:\n")
-	log.Printf(statLog(preamble) + "  Port:\t%s\n", a.port)
-	log.Printf(statLog(preamble) + "  Duration:\t%f\n", a.duration)
-	log.Printf(statLog(preamble) + "  Protocol:\t%d\n", a.protocol)
-	log.Printf(statLog(preamble) + "  Pins:\t0x%X\n", a.pins)
+	log.Printf(statLog(preamble)+"  Port:     %s\n", a.port)
+	log.Printf(statLog(preamble)+"  Duration: %f\n", a.duration)
+	log.Printf(statLog(preamble)+"  Protocol: %d\n", a.protocol)
+	log.Printf(statLog(preamble)+"  Pins:     0x%X\n", a.pins)
 }

@@ -22,6 +22,8 @@ func match(re *regexp.Regexp, s string) string {
 func parseUART(pins string) (ProtocolPins, error) {
 	preamble := "[parseUART]: "
 
+	log.Print(statLog(preamble) + "Parsing UART pins...")
+
 	re_tx := regexp.MustCompile(`tx(\d+)`)
 	re_rx := regexp.MustCompile(`rx(\d+)`)
 
@@ -51,6 +53,8 @@ func parseUART(pins string) (ProtocolPins, error) {
 	txInt = txInt << 12
 	rxInt = rxInt << 8
 
+	log.Print(statLog(preamble) + "Completed UART pin parsing")
+
 	return txInt | rxInt, nil
 }
 
@@ -58,6 +62,8 @@ func parseUART(pins string) (ProtocolPins, error) {
 // "cs3" into miso mosi clk and cs channel numbers.
 func parseSPI(pins string) (ProtocolPins, error) {
 	preamble := "[parseSPI]: "
+
+	log.Print(statLog(preamble) + "Parsing SPI pins...")
 
 	re_miso := regexp.MustCompile(`miso(\d+)`)
 	re_mosi := regexp.MustCompile(`mosi(\d+)`)
@@ -104,6 +110,8 @@ func parseSPI(pins string) (ProtocolPins, error) {
 	mosiInt = mosiInt << 8
 	clkInt = clkInt << 4
 
+	log.Print(statLog(preamble) + "Completed SPI pin parsing")
+
 	return ProtocolPins(misoInt | mosiInt | clkInt | csInt), nil
 }
 
@@ -111,6 +119,8 @@ func parseSPI(pins string) (ProtocolPins, error) {
 // channel numbers.
 func parseI2C(pins string) (ProtocolPins, error) {
 	preamble := "[parseI2C]: "
+
+	log.Print(statLog(preamble) + "Parsing I2C pins...")
 
 	re_sda := regexp.MustCompile(`sda(\d+)`)
 	re_scl := regexp.MustCompile(`scl(\d+)`)
@@ -138,6 +148,8 @@ func parseI2C(pins string) (ProtocolPins, error) {
 	sdaInt = sdaInt << 12
 	sclInt = sclInt << 8
 
+	log.Print(statLog(preamble) + "Completed I2C pin parsing.")
+
 	return ProtocolPins(sdaInt | sclInt), nil
 }
 
@@ -145,6 +157,8 @@ func parseI2C(pins string) (ProtocolPins, error) {
 // channel numbers.
 func parseCAN(pins string) (ProtocolPins, error) {
 	preamble := "[parseCAN]: "
+
+	log.Print(statLog(preamble) + "Parsing CAN pins...")
 
 	re_canh := regexp.MustCompile(`canh(\d+)`)
 	re_canl := regexp.MustCompile(`canl(\d+)`)
@@ -171,6 +185,8 @@ func parseCAN(pins string) (ProtocolPins, error) {
 
 	canhInt = canhInt << 12
 	canlInt = canlInt << 8
+
+	log.Print(statLog(preamble) + "Completed CAN pin parsing.")
 
 	return ProtocolPins(canhInt | canlInt), nil
 }
